@@ -21,11 +21,48 @@ def traversal_reversed(string):
 		index -= 1		
 
 def traversal_for(string):
+	"""
+	Same traversal function, this time using a for loop.
+	"""
 	for char in string:
 		print char	
 
 def traversal_for_reversed(string):
+	"""
+	Reversed string traversal function, using a for loop.
+	"""
+	index = len(string) - 1
 	for char in string:
+		char = string[index]
 		print char			
+		index -= 1
 
-traversal_for_reversed("banana")
+def ducklings():
+	"""
+	Prints ducks' names in alphabetical order. 
+	"""
+	prefixes = "JKLMNOPQ"
+	suffix_ack = "ack" 
+	suffix_uack = "uack" #some of these ducks have different suffixes in their names
+	for letter in prefixes:
+		if letter == prefixes[5] or letter == prefixes[7]:
+			print letter + suffix_uack 
+		else:
+			print letter + suffix_ack	
+
+def test(string):
+	testing = string[:] 
+	print testing #returns the whole string
+
+def find(word, letter):
+	"""
+	Finds given letter in the given word.
+	"""
+	index = 0
+	while index < len(word):
+		if word[index] == letter:
+			return "%s is your letter!" %(letter)
+		index += 1			
+
+
+print find("zebra", "a")
