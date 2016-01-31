@@ -1,15 +1,33 @@
 import math
 
-def factorial(n):
-	if n == 0:
-		return 1
+def factorial(n): 
+	"""
+	Computes the factorial of n.
+	"""
+	if n == 0: 
+		return 1 
 	else:
 		return n * factorial(n-1)
 			
 
-def estimate_py():
-	sum = 2 * math.sqrt(2) / 9801
+def estimate_pi():
+	"""
+	Computes an estimate of pi,
+	according to Srinivasa Ramanujan's 
+	formula. 
+	"""
+	factor = 2 * math.sqrt(2) / 9801
 	k = 0
-#	while True
+	total = 0
+	while True:
+		num = factorial(4*k) * (1103+26390*k)
+		den = factorial(k) ** 4 * 396 ** (4*k)
+		term = factor * num / den
+		total += term
+		if abs(term) < 1e-15: 
+			break
+		k += 1					
+	return 1 / total
 
-print factorial(5)		
+print estimate_pi()	
+print float(math.pi)	
