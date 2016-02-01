@@ -54,15 +54,38 @@ def test(string):
 	testing = string[:] 
 	print testing #returns the whole string
 
-def find(word, letter):
+def find(word, letter, index):
 	"""
 	Finds given letter in the given word.
 	"""
-	index = 0
 	while index < len(word):
 		if word[index] == letter:
-			return "%s is your letter!" %(letter)
-		index += 1			
+			return "%s is your letter" %(word[index])
+		index += 1
+	return -1
 
+def find_and_count(word, letter):
+	"""
+	Returns how many times a letter is in a word
+	"""			
+	index = 0
+	count = 0
+	while index < len(word):
+		if letter == word[index]:
+			count += 1
+		index += 1
+	return count	
 
-print find("zebra", "a")
+def find_and_count_for(word, letter):
+	"""
+	Find and count using a for loop.
+	"""		
+	index = 0
+	count = 0
+	for char in word:
+		if letter == word[index]:
+			count +=1
+		index += 1
+	return count		
+
+print find_and_count_for("banana", "n")
