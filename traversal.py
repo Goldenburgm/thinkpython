@@ -60,7 +60,7 @@ def find(word, letter, index):
 	"""
 	while index < len(word):
 		if word[index] == letter:
-			return "%s is your letter" %(word[index])
+			return index
 		index += 1
 	return -1
 
@@ -88,4 +88,15 @@ def find_and_count_for(word, letter):
 		index += 1
 	return count		
 
-print find_and_count_for("banana", "n")
+def find_and_count_2(word, letter):
+	"""
+	"""
+	index = 0
+	count = 0
+	for char in word:
+		if find(word, letter, index) == index:
+			count += 1
+		index += 1
+	return count		
+
+print find_and_count_2("banana", "a")
