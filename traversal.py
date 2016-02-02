@@ -97,6 +97,39 @@ def find_and_count_2(word, letter):
 		if find(word, letter, index) == index:
 			count += 1
 		index += 1
-	return count		
+	return count
 
-print find_and_count_2("banana", "a")
+def in_both(word1, word2):
+	"""
+	Prints all letters in word1 that are also in word 2.
+	"""
+	for letter in word1:
+		if letter in word2:
+			print letter			
+
+def is_reverse(word1, word2):
+	"""
+	Checks if any of the two words is the reverse of the other.
+	"""
+	if len(word1) != len(word2):
+		return False
+	if word1[0] != word2[-1]:
+		return False
+	
+	equality_count = 0
+	word1_index = 0
+	word2_index = len(word2) - 1
+	for letter in word1:
+		if find(word1, word1[word1_index], word1_index) == find(word2, word2[word2_index], word2_index) - len(word2):
+			equality_count += 1
+		word1_index += 1
+		word2_index -= 1
+	if equality_count == len(word1):
+		return True				
+
+
+
+print is_reverse("rodador", "rodador")
+
+print find("rodador", "r", 0)
+print find("rodador", "r", 6)
