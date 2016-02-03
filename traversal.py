@@ -115,21 +115,22 @@ def is_reverse(word1, word2):
 		return False
 	if word1[0] != word2[-1]:
 		return False
-	
-	equality_count = 0
+
 	word1_index = 0
 	word2_index = len(word2) - 1
-	for letter in word1:
-		if find(word1, word1[word1_index], word1_index) == find(word2, word2[word2_index], word2_index) - len(word2):
-			equality_count += 1
+	equality = 0
+
+	for char in word1:
+		if word1[word1_index] == word2[word2_index]:
+			equality += 1
 		word1_index += 1
 		word2_index -= 1
-	if equality_count == len(word1):
-		return True				
+	if equality == len(word1):
+		return True
+	else:
+		return False			
 
 
 
-print is_reverse("rodador", "rodador")
 
-print find("rodador", "r", 0)
-print find("rodador", "r", 6)
+print is_reverse("stop", "pots")
