@@ -128,9 +128,27 @@ def is_reverse(word1, word2):
 	if equality == len(word1):
 		return True
 	else:
-		return False			
+		return False		
+
+def rotation_crypt(word, factor):
+	"""
+	Encrypts the given word using the rotation encryption,
+	each character in the string gets rotated a number of 
+	times, defined by the factor given.
+	"""	
+	for char in word:
+		rotated_char = ord(char) + factor
+		if rotated_char > 122:
+			while rotated_char > 122:
+				rotated_char -= 26
+		if rotated_char < 97:
+			while rotated_char < 97:
+				rotated_char += 26	
+		print chr(rotated_char),
+		
 
 
 
 
-print is_reverse("stop", "pots")
+
+rotation_crypt("abcde", 1)
