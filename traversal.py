@@ -130,25 +130,31 @@ def is_reverse(word1, word2):
 	else:
 		return False		
 
-def rotation_crypt(word, factor):
+def rotate_letter(letter, factor):
 	"""
-	Encrypts the given word using the rotation encryption,
+	Encrypts the given letter using the rotation encryption,
 	each character in the string gets rotated a number of 
 	times, defined by the factor given.
 	"""	
-	for char in word:
-		rotated_char = ord(char) + factor
-		if rotated_char > 122:
-			while rotated_char > 122:
-				rotated_char -= 26
-		if rotated_char < 97:
-			while rotated_char < 97:
-				rotated_char += 26	
-		print chr(rotated_char),
+	rotated_char = ord(letter) + factor
+	if rotated_char > 122:
+		while rotated_char > 122:
+			rotated_char -= 26
+	if rotated_char < 97:
+		while rotated_char < 97:
+			rotated_char += 26	
+	return chr(rotated_char)
 		
+def rotate_word(word, factor):
+	"""
+	Receives string word and integer factor. Returns the word
+	rotated by the number of times defined in factor.
+	"""
+	ret = ""
+	for char in word:
+		rotated_char = rotate_letter(char, factor)
+		ret += rotated_char
+	return ret	
 
 
-
-
-
-rotation_crypt("abcde", 1)
+print rotate_word("aaaaaaaaa", -27)
