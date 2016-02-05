@@ -25,8 +25,29 @@ def read_words():
 	print "%d percent of the words have no e!"	%(percentage)	
 	
 		
+def avoids(word, f):
+	"""
+	word: string
+	f: string
+
+	Receives a word and checks if it doesn't contain string
+	f. If it doesn't, it returns True. 
+	"""
+
+	if f.upper() in word.upper():
+		return False
+	return True	
+
+def has_no_sub(sub):
+	"""
+	sub: string
+
+	Checks how many words in words.txt have no string 
+	sub
+	"""
+	
 
 
 
 
-read_words()		
+print avoids("Python", "pyti")
