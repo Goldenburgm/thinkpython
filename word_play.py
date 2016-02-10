@@ -41,7 +41,7 @@ def avoids(word, f):
 	return True			
 
 
-def has_no_sub(sub):
+def has_no_sub():
 	"""
 	sub: string
 
@@ -50,12 +50,15 @@ def has_no_sub(sub):
 	"""	
 	file_words = open("words.txt")
 	count = 0
+	count_lines = 0
+	sub = raw_input("> ")
 	for line in file_words:
+		count_lines += 1
 		word = line.strip()
 		if avoids(word, sub) == True:
 			print word
 			count += 1			
-	print "%s words don't have any of the characters in %s" %(count, sub)		
+	percent = (float(count) / float(count_lines)) * 100.0
+	print "%s words don't have any of the characters in %s" %(count, sub)	
+	print "%f percent of words don't have any of the characters in %s" %(percent, sub)
 
-
-has_no_sub("abcdefghijklmno")
