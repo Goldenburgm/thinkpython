@@ -34,7 +34,6 @@ def avoids(word, f):
 	Receives a word and checks if it contains any character in
 	string f. If it doesn't, it returns True. 
 	"""
-
 	for char in f:
 		if char in word:
 			return False
@@ -62,3 +61,64 @@ def has_no_sub():
 	print "%s words don't have any of the characters in %s" %(count, sub)	
 	print "%f percent of words don't have any of the characters in %s" %(percent, sub)
 
+def uses_only(word, sub):
+	"""
+	word: string
+	sub: string
+
+	Tests if string word uses only the characters in string sub.
+	"""
+	for char in word:
+		if char not in sub:
+			return False	
+	return True
+
+def uses_only_sub():
+	"""
+	sub: string
+
+	Checks every word in words.txt and returns only the ones that
+	use only the characters in sub.
+	"""
+	sub = raw_input("> ")
+	file_words = open("words.txt")
+	for line in file_words:
+		words = line.strip()
+		if uses_only(words, sub) == True:
+			print words
+
+def uses_all(word, sub):
+	"""
+	word: string
+	sub: string
+
+	Tests if the string word uses all the characters in string sub
+	(no particular order), returning true if it does.
+	"""
+	for char in sub:
+		if char not in word:
+			return False	
+	return True
+
+def uses_all_sub():
+	"""
+	sub: string
+
+	Checks every word in words.txt and prints each word that uses
+	all the characters in string sub.
+	"""
+	file_words = open("words.txt")
+	count = 0
+	sub = raw_input("> ")
+	for line in file_words:
+		words = line.strip()
+		if uses_all(words, sub) == True:
+			print words
+			count += 1
+	print "%d words use all the letters in '%s'" %(count, sub)		
+
+uses_all_sub()		
+
+
+
+			
