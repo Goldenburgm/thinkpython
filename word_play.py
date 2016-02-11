@@ -117,7 +117,36 @@ def uses_all_sub():
 			count += 1
 	print "%d words use all the letters in '%s'" %(count, sub)		
 
-uses_all_sub()		
+def is_abecedarian(word):
+	"""
+	word: string
+
+	Tests if given word is abecedarian, returning True if it is.
+	"""
+	last_char = ord(word[0])
+	for char in word:
+		current_char = ord(char)
+		if current_char < last_char:
+			return False
+		last_char = current_char
+	return True		
+
+def abecederian_words():
+	"""
+	Checks how many words in words.txt are abecedarian.
+	"""	
+	file_words = open("words.txt")
+	count = 0
+	for line in file_words:
+		word = line.strip()
+		if is_abecedarian(word) == True:
+			print word
+			count += 1
+	print "%d words are abecedarian." %(count)		
+
+
+
+abecederian_words()
 
 
 
