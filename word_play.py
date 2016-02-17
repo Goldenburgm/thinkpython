@@ -142,12 +142,49 @@ def abecederian_words():
 		if is_abecedarian(word) == True:
 			print word
 			count += 1
-	print "%d words are abecedarian." %(count)		
+	print "%d words are abecedarian." %(count)	
+
+def three_double_letters(word):
+	"""
+	word: string
+
+	Checks if given word has three consecutive double letters.
+	"""
+	i = 0
+	three_doubles = 0
+	while i < len(word) - 1:
+		if word[i] == word[i+1]:
+			three_doubles += 1
+			i += 2
+			if three_doubles >= 3:
+				return True
+		else:
+			three_doubles = 0
+			i += 1
+	return False		
+
+
+		
+				
+	
+def check_three_double_letters():
+	"""
+	Searches for words in words.txt that have 3 consecutive
+	double letters and prints them.
+	"""	
+	file_words = open("words.txt")
+	for line in file_words:
+		word = line.strip()
+		if three_double_letters(word) == True:
+			print word
 
 
 
-abecederian_words()
 
+
+
+
+check_three_double_letters()
 
 
 			
