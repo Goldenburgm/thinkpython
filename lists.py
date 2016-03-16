@@ -26,7 +26,6 @@ def capitalize_all(l):
 	for s in l:
 		for s in s:
 			result.append(s.capitalize()) 
-	print result
 
 def cumulative_sum(l):
 	"""
@@ -61,9 +60,39 @@ def chop(l):
 	del l[len(l) - 1]
 	del l[0]
 
+<<<<<<< HEAD
+def is_sorted(l):
+	"""
+	Receives list l and returns true if it is in crescent order.
+	"""
+	i = 0
+	while i < (len(l) - 1):
+		if l[i] > l[i+1]:
+			return False
+		i += 1	
+	return True		
 
-middle(t)
+def is_anagram(s1, s2):
+	"""
+	Receives two strings and returns true if they're anagrams.
+	"""	
+	#Listing both strings
+	s1_listed = list(s1)
+	s2_listed = list(s2)
 
+	#Capitalizing both listed strings
+	s1_capitalized = capitalize_all(s1_listed)
+	s2_capitalized = capitalize_all(s2_listed)
+
+	#Sorting both listed strings
+	s1_capitalized.sort()
+	s2_capitalized.sort()
+
+	if s1_capitalized == s2_capitalized:
+		return True
+	return False
+			
+is_anagram("Joe", "OJe")	
 
 
 
