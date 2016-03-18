@@ -60,7 +60,6 @@ def chop(l):
 	del l[len(l) - 1]
 	del l[0]
 
-<<<<<<< HEAD
 def is_sorted(l):
 	"""
 	Receives list l and returns true if it is in crescent order.
@@ -92,8 +91,16 @@ def is_anagram(s1, s2):
 		return True
 	return False
 			
-is_anagram("Joe", "OJe")	
+def has_duplicates(l):
+	"""
+	Receives list l and return True if it has a duplicate item.
+	"""
+	for i in range(0, len(l) - 1):
+		if l.count(i) > 1:
+			return True
+	return False		
 
+print has_duplicates()
 
 
 
