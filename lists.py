@@ -1,4 +1,5 @@
-nested_list = [1, [1, 1, 1], [1, 1, 1, 3]]
+import random
+
 nested_string_list = ["a", ["a", "b", "c"], "d"]
 cumulative = [1, [1, 1], 3]
 t = [1, 3, 5, 7, 8]
@@ -100,7 +101,32 @@ def has_duplicates(l):
 			return True
 	return False		
 
-print has_duplicates()
+def gen_birthday():
+	"""
+	Returns a list of 23 random birthdays.
+	"""
+	res = []
+	for i in range(23):
+		res.append(random.randint(1,365))
+	return res
+	
+def bday_paradox_simulation(classes):
+	"""
+	Receives int class.
+	Tests the probability of double birthdays appearing in classes 
+	of 23 people.
+	"""		
+	double_bday = 0
+	for i in range(classes):
+		if has_duplicates(gen_birthday()) == True:
+			double_bday += 1
+	print "After %i simulations" %(classes),
+	print "with 23 students",
+	print "there were %i matches." %(double_bday),
+
+bday_paradox_simulation(1000)
+
+
 
 
 
