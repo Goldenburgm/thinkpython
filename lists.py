@@ -1,4 +1,5 @@
 import random
+import time
 
 nested_string_list = ["a", ["a", "b", "c"], "d"]
 cumulative = [1, [1, 1], 3]
@@ -124,7 +125,38 @@ def bday_paradox_simulation(classes):
 	print "with 23 students",
 	print "there were %i matches." %(double_bday),
 
-bday_paradox_simulation(1000)
+def remove_duplicates(l):
+	"""
+	Receives a list and tests if it has any duplicates. If it does,
+	returns a new list containing all non-duplicate items from the
+	first list.
+	"""
+	res = []
+	if has_duplicates(l) == False:
+		return "There are no duplicate items in this list."
+	for i in range(0, len(l) - 1):
+		if l.count(l[i]) <= 1:
+			res.append(l[i])
+	return res	
+
+def word_list_append():
+	"""
+	Returns the time it takes to append every word in words.txt to a list.
+	"""
+	res = []
+	file_words = open("words.txt")
+	start = time.time()
+	for line in file_words:
+		word = line.strip()
+		res.append(word)
+	end = time.time()
+	var_time = end - start	
+	print var_time
+
+def 	
+
+word_list()
+
 
 
 
