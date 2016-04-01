@@ -1,9 +1,12 @@
 import random
 import time
+import bisect
 
-nested_string_list = ["a", ["a", "b", "c"], "d"]
-cumulative = [1, [1, 1], 3]
-t = [1, 3, 5, 7, 8]
+def file_words_open():
+	global file_words_global
+	file_words_global = open("words.txt")
+
+
 
 def nested_sum(l):
 	"""
@@ -153,9 +156,62 @@ def word_list_append():
 	var_time = end - start	
 	print var_time
 
-def 	
+def word_list_increment():
+	"""
+	Returns the time it takes to increment every word in words.txt to a list.
+	"""
+	res = []
+	file_words = open("words.txt")
+	start = time.time()
+	for line in file_words:
+		word = line.strip()
+		res += word
+	end = time.time()
+	var_time = end - start	
+	print var_time
 
-word_list()
+def word_bisect(s):
+	"""
+	Returns True if given word is in the words.txt file, using the bisect() function.
+	"""	
+	#Listing the words in words.txt
+	file_words = open("words.txt")
+	word_list = []
+	for line in file_words:
+		word = line.strip()
+		word_list.append(word)
+	#Searching each half of the list
+	b_right = bisect.bisect_right(word_list, s)
+	b_left = bisect.bisect_left(word_list, s)
+	if b_right > len(word_list) - 1:
+		file_words.close()
+		return False
+	elif b_left < 0:
+		file_words.close()
+		return False
+	else:
+		if word_list[b_right] == s or word_list[b_left] == s:
+			file_words.close()
+			return True
+	file_words.close()
+	return False
+
+	
+def reverse_pair():
+	"""
+	Finds all the reverse pairs in the file words.txt 
+	and returns a list containing them.
+	"""
+	res = []
+	file_words = open("words.txt")
+	for line in file_words:
+		word = line.strip()
+		reverse_word = word[::-1]
+		if word_bisect(reverse_word) == True:
+			res.append(reverse_word)
+			res.append(word)
+			print res				
+print reverse_pair()
 
 
 
