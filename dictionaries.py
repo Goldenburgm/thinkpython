@@ -1,6 +1,6 @@
 """Exercises from book Think Python, by Allen B. Downey.
 http://thinkpython.com
-Following code by Matheus Fernandes Gonçalves,
+Following code by Matheus Fernandes Goncalves,
 04/10/2016.
 """
 
