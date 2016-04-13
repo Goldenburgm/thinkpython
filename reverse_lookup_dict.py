@@ -6,7 +6,7 @@ Following code by Matheus Fernandes Goncalves,
 
 import histogram
 
-test_dictionary = histogram.histogram("aaabbb")
+test_dictionary = histogram.histogram("aaabbbcccaaadddaaa")
 
 def reverse_lookup(v, d):
 	"""v: any value.
@@ -27,10 +27,8 @@ def invert_dict(d):
 	result = dict()
 	for key in d:
 		value = d[key]
-		if value in result:
-			result[value].append(key)
-		else:
-			result[value] = [key]	
+		result.setdefault(value, [])
+		result[value].append(key)	
 	return result
 	
 print invert_dict(test_dictionary)		 
