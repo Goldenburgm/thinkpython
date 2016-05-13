@@ -1,5 +1,7 @@
 import random
 import math
+import collections
+import os
 
 def is_prime(n):
 	"""n: positive integer
@@ -15,7 +17,6 @@ def random_prime():
 	"""Returns a random prime number.
 	"""	
 	notPrime = True
-	prime_list = []
 	while notPrime == True:
 		n = random.getrandbits(8)
 		if is_prime(n) == True:
@@ -82,7 +83,7 @@ def keypair_gen():
 	public_key1 = random_prime_range(1, totient) #this is e
 	public_key2 = p * q #this is n
 	private_key	= mod_inverse(public_key1, totient)
-	return public_key1, public_key2, private_key
+	return public_key1, public_key2, private_key, totient
 
 def encrypt_message(m, public_key1, public_key2):
 	"""m: message encoded by encode_message() function
@@ -90,30 +91,108 @@ def encrypt_message(m, public_key1, public_key2):
 	"""	
 	res = []
 	for item in m:
+		#converting each char to an int using ord()
 		encrypted_char = ord(item) ** public_key1 % public_key2
 		res.append(encrypted_char)
 	return res	
 
-def decrypt_message(m, private_key):
+def decrypt_message(m, private_key, public_key2):
 	"""m: message encrypted by encrypt_message() function
 	private_key: integer returned by mod_inverse()
 	Returns decrypted message.
 	"""
 	res = []
 	for item in m:
-		decrypted = chr((item ** private_key % public_key2))
+		#converting every int back to a char using chr()
+		decrypted = chr(int(item) ** private_key % public_key2)
 		res.append(decrypted)
 	return res
 
-keys = keypair_gen()
-public_key1 = keys[0]
-public_key2 = keys[1]
-private_key = keys[2]
+def save_to_file(content, file_name):
+	"""content: any data type
+	file_name: String. 
+	Create file named file_name containing whatever was issued to the
+	parameter content. This function assumes the file is a txt. The resulting file contains
+	"""
+	new_file = open(file_name, 'w')
+	#if the content is iterable
+	if isinstance(content, collections.Iterable): 
+		for item in content:
+			new_file.write(str(item)) 
+			new_file.write("\n")
+	else:
+		#converting content to str to avoid character buffer exception	
+		new_file.write(str(content)) 
 
-print public_key1
-print public_key2
-print private_key
-print keys
+def file_to_list(file_name):
+	"""Receives file and returns a list contaning one item per line of the
+	file.
+	"""	
+	open_file = open(file_name)
+	res = []
+	for line in open_file:
+		item = line.strip()
+		res.append(item)	
+	return res	
 
-encrypted = encrypt_message("abc", keys[0], keys[1])
-print decrypt_message(encrypted, keys[2])
+def a_choice():
+	"""
+	"""
+	notChosen = True
+	while notChosen == True:
+		print "Choose an option:"
+		print "A - Generate public and private key"
+		print "B - Encrypt message (requires public key)"
+		print "C - Decrypt message (requires private key)"
+		print "D - Exit script"
+		choice = raw_input("> ")
+
+		if str(choice.upper()) == "A":
+			print "Generating your keys..."
+			keys = keypair_gen()
+			public_key1 = keys[0]
+			public_key2 = keys[1]
+			private_key = keys[2]
+			save_to_file(public_key1, "pub_key1.txt")
+			save_to_file(public_key2, "pub_key2.txt")
+			save_to_file(private_key, "priv_key.txt")
+
+		elif str(choice.upper()) == "B":	
+			print "Type the message you wish to encrypt: "
+			message = raw_input("> ")
+			print "Using the public keys in your current directory"
+			print "to encrypt your message..."
+			pub_key1_file = open("pub_key1.txt")
+			pub_key2_file = open("pub_key2.txt")
+			#read each pub_key file as an int
+			pub_key1 = int(pub_key1_file.read()) 
+			pub_key2 = int(pub_key2_file.read())
+			encrypted_message = encrypt_message(message, pub_key1, pub_key2)
+			save_to_file(encrypted_message, "encrypted_message.txt")
+			print "Your message is in the encrypted_message.txt file."
+
+		elif str(choice.upper()) == "C":
+			print "Searching for a encrypted message and private key"
+			print "in your current directory..."
+			pub_key2_file = open("pub_key2.txt")
+			priv_key_file = open("priv_key.txt")
+			pub_key2 = int(pub_key2_file.read())
+			priv_key = int(priv_key_file.read())
+			message = file_to_list("encrypted_message.txt")
+			decrypted_message = decrypt_message(message, priv_key, pub_key2)
+			#joining list to a readable string
+			decrypted_message_string = "".join(decrypted_message)
+			print decrypted_message_string
+
+		elif str(choice.upper()) == "D":
+			notChosen = False
+
+
+a_choice()
+
+
+
+
+
+
+
