@@ -9,7 +9,8 @@ def file_to_word_list(f):
 	open_file = open(f)
 	for line in open_file:
 		for item in line.split():
-			word = item.strip(string.punctuation)
+			#removing special characters using list comprehension
+			word = "".join([char for char in item if char not in string.punctuation])
 			#testing for whitespaces
 			if word:
 				res.append(word)
@@ -51,4 +52,4 @@ def most_frequent_item(t, n=20):
 	
 
 
-print most_frequent_item(file_to_word_list("pg41787.txt"))
+print file_to_word_list("pg41787.txt")
