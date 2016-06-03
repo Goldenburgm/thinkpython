@@ -13,7 +13,7 @@ def file_to_word_list(f):
 			word = "".join([char for char in item if char not in string.punctuation])
 			#testing for whitespaces
 			if word:
-				res.append(word)
+				res.append(word.lower())
 	return res
 	
 def count_words(t):
@@ -43,13 +43,16 @@ def most_frequent_item(t, n=20):
 	#sorting using count as key as tuple(item, count)
 	res.sort(reverse=True, key=operator.itemgetter(1))
 	return res[0:n]		
-	
-		
 
+def seq_difference(t1, t2):
+	"""t1, t2: sequences
+	Returns every item of t1 that's not in t2.
+	"""	
+	t1_set = set(t1)
+	t2_set = set(t2)
+	return list(set.difference(t1_set, t2_set))
 
+t1 = file_to_word_list("pg41787.txt")
+t2 = file_to_word_list("words.txt")
 
-
-	
-
-
-print file_to_word_list("pg41787.txt")
+print seq_difference(t1, t2)
