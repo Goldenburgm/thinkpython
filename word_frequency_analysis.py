@@ -9,11 +9,12 @@ def file_to_word_list(f):
 	open_file = open(f)
 	for line in open_file:
 		for item in line.split():
+			special_characters = "#$%&'()*+/<=>?@[\]^_`{|}~"
 			#removing special characters using list comprehension
-			word = "".join([char for char in item if char not in string.punctuation])
+			word = "".join([char for char in item if char not in special_characters])
 			#testing for whitespaces
 			if word:
-				res.append(word.lower())
+				res.append(word)
 	return res
 	
 def count_words(t):
@@ -52,7 +53,8 @@ def seq_difference(t1, t2):
 	t2_set = set(t2)
 	return list(set.difference(t1_set, t2_set))
 
-t1 = file_to_word_list("pg41787.txt")
-t2 = file_to_word_list("words.txt")
 
-print seq_difference(t1, t2)
+if __name__ == "__main__":
+	t1 = file_to_word_list("pg41787.txt")
+	t2 = file_to_word_list("words.txt")
+	print seq_difference(t1, t2)
