@@ -14,19 +14,22 @@ def anagram(f):
 		#key with an empty list
 		anagrams_dict.setdefault(sorted_word, []).append(word)
 	
-	anagrams = list()
+	#anagrams = list()
 
 	#searching for every value greater than one in dict
 	#value = number of items in list of words
-	for key, value in anagrams_dict.items():
-		if len(value) > 1:
-			anagrams.append(value)
+	#for key, value in anagrams_dict.items():
+	#	if len(value) > 1:
+	#		anagrams.append(value)
 
 	#sorting anagram list by length, in decreasing order
-	anagrams.sort(key=len, reverse=True)
+	#anagrams.sort(key=len, reverse=True)
 
-	for item in anagrams:
-		print item, len(item)
+	#for item in anagrams:
+	#	print item, len(item)
 
-	
-print anagram("words.txt")		
+	return anagrams_dict
+
+
+if __name__ == "__main__":	
+	print anagram("words.txt")		
