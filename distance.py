@@ -20,4 +20,5 @@ def calc_distance(p1, p2):
 						 math.pow((p2.y-p1.y), 2))
 	return distance
 
-print calc_distance(p1, p2)	
+if __name__ == "__main__":
+	print calc_distance(p1, p2)	
