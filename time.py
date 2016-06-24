@@ -32,26 +32,42 @@ def increment_seconds(t, seconds):
 	seconds: integer
 	Returns new Time() object with added seconds.
 	"""	
-	new_time = Time()
-	new_time.hour = t.hour
-	new_time.minute = t.minute
-	new_time.second = t.second
+	new_time = int_to_time((time_to_int(t) + seconds))
+	return new_time
 
-	new_time.second += seconds
+def time_to_int(t):
+	"""t: Time() object.
+	Converts given time attributes to a single integer value.
+	"""	
+	minutes = t.hour * 60 + t.minute
+	seconds = minutes * 60 + t.second
+	return seconds
 
-	if new_time.second >= 60:
-		remainder = new_time.second % 60
-		new_time.minute += seconds / 60
-		new_time.second = remainder
+def int_to_time(n):
+	"""n: integer
+	Converts given integer to a Time() object.
+	"""	
+	time = Time()
+	minutes, time.second = divmod(n, 60)
+	time.hour, time.minute = divmod(minutes, 60)
+	return time
 
-	if new_time.minute >= 60:
-		remainder = new_time.minute % 60
-		new_time.hour += new_time.minute / 60
-		new_time.minute = remainder
+def add_time(t1, t2):
+	"""t1, t2: Time() objects.
+	Returns a new Time() that is the sum of both time objects.
+	"""	
+	res = time_to_int(t1) + time_to_int(t2)
+	return int_to_time(res)
 
-	return new_time		
+def mul_time(t1, n):
+	"""t1: Time() object.
+	n: numeric value.
+	Returns a new Time() that is the product of t1 times n.
+	"""
+	res = time_to_int(t1) * n
+	return int_to_time(res)
 
 if __name__ == "__main__":
-	new_time = increment_seconds(time, 4000)
-	print_time(time)
-	print_time(new_time)
+	test = mul_time(time, 10)
+	print_time(test)
+	
