@@ -1,16 +1,8 @@
+import datetime
+
 class Time(object):
 	"""Represents time in hours, minutes and seconds.
 	"""
-
-time = Time()
-time.hour = 21
-time.minute = 1
-time.second = 50
-
-time2 = Time()
-time2.hour = 21
-time2.minute = 2
-time2.second = 34
 
 def print_time(t):
 	"""Receives: Time() object.
@@ -67,7 +59,37 @@ def mul_time(t1, n):
 	res = time_to_int(t1) * n
 	return int_to_time(res)
 
+def average_pace(t, distance):
+	"""t: Time() object.
+	distance: distance in miles.
+	Considering it took t to go over given distance, returns the
+	average pace in miles per second.
+	"""	
+	res = float(distance) / float(time_to_int(t))
+	return res
+
+def week_day():
+	"""
+	Prints the day of the week.
+	"""
+	current_time = datetime.datetime.now()
+	week_days = {0:"Monday", 1:"Tuesday", 2:"Wednesday", 3:"Thursday",
+				 4:"Friday", 5:"Saturday", 6:"Sunday"}
+	week_day = current_time.weekday()
+	print "Today is {}".format(week_days[week_day])
+
+
+
 if __name__ == "__main__":
-	test = mul_time(time, 10)
-	print_time(test)
+	time = Time()
+	time.hour = 0
+	time.minute = 0
+	time.second = 30
+
+	time2 = Time()
+	time2.hour = 21
+	time2.minute = 2
+	time2.second = 34
+	
+	week_day()
 	
